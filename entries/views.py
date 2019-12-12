@@ -14,6 +14,13 @@ class HomeView(LoginRequiredMixin, ListView):
 	ordering = ['-contract_date']
 	paginate_by = 3
 
+class HomeView1(ListView):
+	model = Contract
+	template_name = 'entries/base.html'
+	context_object_name = "blog_entries"
+	ordering = ['-contract_date']
+	paginate_by = 3
+
 
 class ContractView(LoginRequiredMixin, DetailView):
 	model = Contract
@@ -26,7 +33,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
 class CreateContractView(LoginRequiredMixin, CreateView):
 	model = Contract
 	template_name = 'entries/create_contract.html'
-	fields = ['contract_title', 'contract_details', 'contract_price', 'contract_deadline', 'contract_image1', 'contract_image2', 'contract_doc']
+	fields = ['contract_title', 'contract_details', 'contract_price', 'contract_deadline', 'contract_image1', 'contract_image2', 'contract_doc', 'contract_paymentVerification']
 
 	def form_valid(self, form):
 		form.instance.contract_creator = self.request.user

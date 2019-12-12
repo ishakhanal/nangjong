@@ -17,7 +17,8 @@ class Contract(models.Model):
     contract_image1 = models.ImageField(upload_to='contract_image' , blank=True)
     contract_image2 = models.ImageField(upload_to='contract_image' , blank=True)
     contract_doc = models.FileField(upload_to='documents', blank=True)
-
+    contract_paymentVerification = models.ImageField(upload_to='payment' , blank=True)
+    approved_contract = models.BooleanField(default=False)
     class Meta:
         verbose_name_plural = "entries"
 

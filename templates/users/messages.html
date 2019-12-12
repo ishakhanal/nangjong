@@ -29,7 +29,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'about' %}">Help</a>
+      <a class="navbar-brand" href="{% url 'letsbid-home' %}">LetsBid</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -37,7 +37,22 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
+            <a class="nav-link" href="{% url 'letsbid-home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'notification' %}">Notification</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message' %}">Message</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'create_contract' %}">Post now</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile' %}">{{ user.username }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           </li>
         </ul>
       </div>
@@ -52,9 +67,10 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
             <h1>LetsBid</h1>
-            <span class="subheading">Scroll down to view the new contracts and bid on the contract that interests you.</span>
-            <br>
-            <a class="btn btn-primary" href="{% url 'login' %}">login</a>
+            <span class="subheading">Have any queries? Message us here <br><br>
+              <a class="btn btn-primary" href="{% url 'create_message' %}">Send message</a>
+              <br><br> <strong>Note:</strong> Messages will be replied within 24hrs</span>
+              <p>Scroll down to view messages you have send </p>
           </div>
         </div>
       </div>
@@ -62,32 +78,28 @@
   </header>
 
   <!-- Main Content -->
-  {% for contract in blog_entries %}
+  {% for usermessage in user_messages %}
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
-            <h2 class="post-title">
-              {{ contract.contract_title }}
-            </h2>
             <p class="post-meta">
-              {{ contract.contract_details|truncatechars:250 }}<a class="btn btn-link" href="{% url 'contract-detail' contract.pk %}">View Details &rarr;</a>
+              {{ usermessage.user_message }}
+              <br>
+              Send at: {{ usermessage.send_date }}
             </p>
-            <p class="post-meta">Posted by
-            <a href="{% url 'user-details' pk=contract.contract_creator.pk %}">{{ contract.contract_creator }}</a>
-            on {{ contract.contract_date }}</p>
-            <a class="btn btn-primary" href="{% url 'contract-detail' pk=contract.pk %}">Bids</a>
-            <br>
             <hr>
-            <br>
+            <p>
+            <strong>Reply: </strong><span>{{usermessage.admin_reply}}</span>
+            </p>
+            <hr>
+
         </div>
+
       </div>
     </div>
   </div>
-  {% empty %}
-    <h4> No contracts available at the moment </h4>
   {% endfor %}
-
 
 
   <hr>

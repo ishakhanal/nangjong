@@ -40,7 +40,10 @@
             <a class="nav-link" href="{% url 'letsbid-home' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'letsbid-home' %}">About</a>
+            <a class="nav-link" href="{% url 'notification' %}">Notification</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'message' %}">Message</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'create_contract' %}">Post now</a>
@@ -65,6 +68,7 @@
           <div class="site-heading">
             <h1>{{ object.contract_title }}</h1>
             <span class="subheading">{{ object.contract_details|linebreaks }}</span>
+            <h6>Deadline: {{object.contract_deadline}}</h6>
             <hr>
             <p class="post-meta">Posted by <a href="{% url 'user-details' pk=object.contract_creator.pk %}">{{ object.contract_creator }}</a>
             on {{object.contract_date }}</p><br>
@@ -108,10 +112,6 @@
 
       <hr>
       <br>
-
-
-
-
 
   <!-- Main Content -->
   {% if object.compdate %}

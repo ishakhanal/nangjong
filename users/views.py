@@ -6,7 +6,10 @@ from datetime import datetime
 from users.forms import (EditProfileForm, ProfileForm, RegistrationForm)
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, ListView
 from entries.models import Contract
+from users.models import Usermessage, Notification
 
 def register(request):
 	if request.method == 'POST':
@@ -57,3 +60,27 @@ def userprofile(request):
     user_posts = Contract.objects.filter(contract_creator=request.user).order_by('-contract_date')
     template = 'users/profile.html'
     return render(request, template, {'user_posts':user_posts,'user': user})
+
+class CreateMessageView(LoginRequiredMixin, CreateView):
+    model = Usermessage
+    template_name = 'users/create_message.html'
+    fields = ['user_message']
+
+    def form_valid(self, form):
+        form.instance.message_creator = self.request.user
+        return super().form_valid(form)
+
+
+@login_required
+def usernotification(request):
+    user = request.user
+    user_notifications = Notification.objects.filter(message_receiver=request.user).order_by('-notification_date')
+    template = 'users/notifications.html'
+    return render(request, template, {'user_notifications':user_notifications,'user': user})
+
+@login_required
+def usermessage(request):
+    user = request.user
+    user_messages = Usermessage.objects.filter(message_creator=request.user).order_by('-send_date')
+    template = 'users/messages.html'
+    return render(request, template, {'user_messages':user_messages,'user': user})

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HomeView, ContractView, CreateContractView, UserDetailView
+from .views import HomeView, ContractView, CreateContractView, UserDetailView, HomeView1
 from . import views
 from django.views.generic import TemplateView
 
@@ -12,6 +12,7 @@ urlpatterns = [
    	path('contract/<int:pk>/comment/', views.add_comment_to_post, name='add_comment_to_post'),
    	path('about/', TemplateView.as_view(template_name='entries/about.html'), name = 'about'),
    	path('details/<int:pk>/',UserDetailView.as_view(), name = 'user-details'),
+   	path('home/', HomeView1.as_view(), name='home'),
 
 
 
