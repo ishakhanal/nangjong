@@ -4,10 +4,12 @@ import datetime
 from datetime import datetime
 from django.contrib.auth.models import User
 import pytz
+from django import forms
 
 
 # Create your models here.
 class Contract(models.Model):
+
     contract_title = models.TextField(max_length=250)
     contract_details = models.TextField()
     contract_price = models.IntegerField()
