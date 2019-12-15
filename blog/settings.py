@@ -25,7 +25,7 @@ SECRET_KEY = 'wd@bueetj614&!lzf@7l%f%1&=*ye_#=8q%-)6+*_#-19g*m-='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['letsbid.in']
 
 
 # Application definition
@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'Letsbid',
+        'USER': 'ishakhanal',
+        'PASSWORD': 'Moneeka@76'
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
