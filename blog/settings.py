@@ -79,11 +79,11 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'Letsbid',
-        'USER': 'ishakhanal',
-        'PASSWORD': 'Moneeka@76'
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'letsbid_Letsbid',
+        'USER': 'letsbid_ishakhanal',
+        'PASSWORD': 'Moneeka@76',
+        'HOST': "",
+        'PORT': '',
     }
 }
 
@@ -135,4 +135,10 @@ AUTH_PROFILE_MODULE = "users.Profile"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
+DEFAULT_FROM_EMAIL = 'letsbid@localhost'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'khanaleshaa@gmail.com'
+EMAIL_HOST_PASSWORD = 'Moneeka76'
+EMAIL_PORT = 587
